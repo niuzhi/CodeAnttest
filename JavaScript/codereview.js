@@ -6,7 +6,9 @@ function calculateSum(array) {
   if (!Array.isArray(array)) {
     throw new TypeError("Input must be an array of numbers.")
   }
-  return array.reduce((sum, num) => sum + num, 0)
+  if (!array.every((num) => typeof num === "number")) {
+    throw new TypeError("Input must be an array of numbers.")
+  }
 }
 
 // Function to fetch user data from an API with error handling
