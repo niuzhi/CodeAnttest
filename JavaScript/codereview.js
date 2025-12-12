@@ -43,9 +43,11 @@ function formatFullName(user) {
 
 // Function to process multiple users and calculate their total ID sum
 async function processUsers(userIds) {
+  const fetchedUsers = await Promise.all(
+    userIds.map((userId) => fetchUserData(userId))
+  )
   const results = []
-  for (const userId of userIds) {
-    const user = await fetchUserData(userId)
+  for (const user of fetchedUsers) {
     if (user) {
       const fullName = formatFullName(user)
       console.log("Processed User:", fullName)
