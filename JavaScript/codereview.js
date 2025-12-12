@@ -30,15 +30,18 @@ async function fetchUserData(userId) {
 
 // Function to format a user's full name safely
 function formatFullName(user) {
-  if (
-    !user ||
-    typeof user.firstName !== "string" ||
-    typeof user.lastName !== "string"
-  ) {
+  if (!user) {
     console.warn("Invalid user object. Returning 'Unknown User'.")
     return "Unknown User"
   }
-  return `${user.firstName} ${user.lastName}`
+  if (typeof user.firstName === "string" && typeof user.lastName === "string") {
+    return `${user.firstName} ${user.lastName}`
+  }
+  if (typeof user.name === "string") {
+    return user.name
+  }
+  console.warn("Invalid user object. Returning 'Unknown User'.")
+  return "Unknown User"
 }
 
 // Function to process multiple users and calculate their total ID sum
