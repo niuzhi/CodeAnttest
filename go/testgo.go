@@ -5,13 +5,19 @@ import (
 	"os"
 )
 
-func readFileContent(filename string) string {
-	// 缺陷：忽略了os.ReadFile的error返回值
-	data, _ := os.ReadFile(filename)
-	return string(data)
+func readFileContent(filename string) (string, error) {
+    data, err := os.ReadFile(filename)
+    if err != nil {
+        return "", err
+    }
+    return string(data), nil
 }
 
 func main() {
-	content := readFileContent("nonexistent_file.txt")
+    content, err := readFileContent("nonexistent_file.txt")
+    if err != nil {
+        fmt.Println("读取文件失败：", err)
+        return
+    }
 	fmt.Println("文件内容：", content)
 }
