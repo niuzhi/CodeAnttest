@@ -21,3 +21,8 @@ func main() {
     }
 	fmt.Println("文件内容：", content)
 }
+
+
+func calculateAverage(sum, count int) float64 {
+    return float64(sum) / float64(count)
+}
